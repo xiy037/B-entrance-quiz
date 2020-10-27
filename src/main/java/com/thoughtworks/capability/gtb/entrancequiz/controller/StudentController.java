@@ -1,5 +1,6 @@
 package com.thoughtworks.capability.gtb.entrancequiz.controller;
 
+import com.thoughtworks.capability.gtb.entrancequiz.entity.Group;
 import com.thoughtworks.capability.gtb.entrancequiz.entity.Student;
 import com.thoughtworks.capability.gtb.entrancequiz.service.StudentsService;
 import org.springframework.http.HttpStatus;
@@ -30,5 +31,19 @@ public class StudentController {
     public ResponseEntity<Student> addNewStudent(@PathVariable String name) {
         Student result = StudentsService.addNewStudent(name);
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/group")
+    public ResponseEntity<List<Group>> getStudentGroup() {
+        List<Group> studentGroup = StudentsService.getStudentGroup();
+        if (studentGroup.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(studentGroup, HttpStatus.OK);
+    }
+
+    @PostMapping("/newGroups")
+    public void addStudentGroup(@RequestBody List<Group> studentGroup) {
+        StudentsService.addStudentGroup(studentGroup);
     }
 }
