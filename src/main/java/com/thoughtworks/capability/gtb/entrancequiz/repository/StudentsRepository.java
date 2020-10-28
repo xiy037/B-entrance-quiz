@@ -7,6 +7,7 @@ import java.util.List;
 
 public class StudentsRepository {
 
+    // TODO GTB-知识点: - 违反了封装性，字段应该使用private
     public List<Student> students = new ArrayList<>();
 
     {
